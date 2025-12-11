@@ -1,0 +1,43 @@
+version: '3.1'
+
+services:
+  n8n:
+    image: n8nio/n8n
+    container_name: n8n
+    environment:
+      - DB_TYPE=postgresdb
+      - DB_POSTGRESDB_HOST=db
+      - DB_POSTGRESDB_PORT=5432
+      - DB_POSTGRESDB_DATABASE=n8n
+      - DB_POSTGRESDB_USER=n8n
+      - DB_POSTGRESDB_PASSWORD=n8n
+      - N8N_BASIC_AUTH_ACTIVE=true
+      - N8N_BASIC_AUTH_USER=admin
+      - N8N_BASIC_AUTH_PASSWORD=admin123
+      - N8N_HOST=treva-medicamentous-scantly.ngrok-free.dev
+      - WEBHOOK_URL_BASE=treva-medicamentous-scantly.ngrok-free.dev
+      - N8N_PORT=443
+      - N8N_PROTOCOL=https
+      - N8N_SSL_KEY=/home/node/certs/key.pem
+      - N8N_SSL_CERT=/home/node/certs/cert.pem
+    ports:
+      - "443:443"
+    volumes:
+      - ./data:/home/node/.n8n
+      - ./certs:/home/node/certs
+    depends_on:
+      - db
+
+  db:
+    image: postgres:13
+    container_name: n8n_postgres
+    environment:
+      - POSTGRES_DB=n8n
+      - POSTGRES_USER=n8n
+      - POSTGRES_PASSWORD=n8n
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
+
+networks:
+  default:
+    driver: bridge

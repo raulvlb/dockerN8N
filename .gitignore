@@ -1,0 +1,44 @@
+# Dados persistidos do docker / banco
+data/
+data/**
+
+# Certificados SSL e chaves
+certs/
+*.pem
+*.key
+*.crt
+
+# Arquivo de ambiente com segredos
+.env
+.env.* 
+
+# Backups e dumps do banco
+*.sql
+*.dump
+n8n.sql
+
+# Credenciais e arquivos sensíveis
+*.pem
+*.key
+*.p12
+.secrets/
+secrets/
+
+# Configs locais do Docker / overrides
+docker-compose.override.yml
+docker-compose.*.yml
+
+# IDE / SO
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Logs e runtime
+*.log
+tmp/
+*.pid
+
+# Permitir pasta de exports com workflows compartilhados (se desejar)
+!exports/
